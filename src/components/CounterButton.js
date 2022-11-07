@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function CounterButton({label, children}) {
+export function CounterButton({ label, children }) {
   const [count, setCount] = useState(0);
 
   function incrementCount() {
@@ -13,4 +13,3 @@ export function CounterButton({label, children}) {
     </button>
   );
 }
-

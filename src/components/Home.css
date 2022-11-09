@@ -1,5 +1,7 @@
-.center-horizontally {
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto;
+.Home {
+  margin: 1rem;
+}
+
+.search-container {
+  margin-bottom: 10px;
 }

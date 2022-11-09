@@ -1,31 +1,10 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { Loader } from "./Loader";
 import { UserCard } from "./UserCard";
 import "./Home.css";
+import { useUsers } from "../api/users";
 
 export function Home() {
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    setIsLoading(true);
-
-    axios
-      .get("https://reqres.in/api/users?delay=3")
-      .then((response) => {
-        const newUsers = response.data.data;
-
-        setUsers(newUsers);
-      })
-      .catch((error) => {
-        setError(error.message);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
+  const { data: users, error, isLoading } = useUsers();
 
   if (isLoading) {
     return (

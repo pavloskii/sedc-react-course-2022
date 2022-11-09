@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Home } from "./components/Home";
-import { LikesAndDislikes } from "./components/LikesAndDislikes";
+import { UserDetails } from "./components/UserDetails";
 
 function App() {
   const [isHomeVisible, setIsHomeVisible] = useState(true);
@@ -11,9 +11,9 @@ function App() {
 
   return (
     <div>
-      <button onClick={toggleView}>Toggle between home and likes</button>
+      <button onClick={toggleView}>Toggle between home and Post Details</button>
       <hr />
-      {!isHomeVisible && <LikesAndDislikes />}
+      {!isHomeVisible && <UserDetails />}
       {isHomeVisible && <Home />}
     </div>
   );

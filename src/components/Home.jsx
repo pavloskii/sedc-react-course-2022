@@ -1,12 +1,22 @@
+import { useEffect, useRef, useState } from "react";
 import { Loader } from "./Loader";
 import { UserCard } from "./UserCard";
-import "./Home.css";
 import { useUsers } from "../api/users";
-import { useState } from "react";
+import "./Home.css";
 
 export function Home() {
   const { data: users, error, isLoading } = useUsers();
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const searchInputRef = useRef();
+
+  useEffect(() => {
+    if (users === null) {
+      return;
+    }
+
+    searchInputRef.current.focus();
+    setFilteredUsers(users);
+  }, [users]);
 
   function filterUsers(event) {
     const value = event.target.value.toLowerCase();
@@ -35,7 +45,12 @@ export function Home() {
   return (
     <div className="Home">
       <div className="search-container">
-        <input type="text" placeholder="Search.." onInput={filterUsers} />
+        <input
+          ref={searchInputRef}
+          type="text"
+          placeholder="Search.."
+          onInput={filterUsers}
+        />
         <button>
           <i className="fa fa-search"></i>
         </button>

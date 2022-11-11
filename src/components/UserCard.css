@@ -1,5 +1,5 @@
 .UserCard {
-  width: 500px;
+  width: 25%;
   display: inline-block;
   background-color: wheat;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -8,6 +8,7 @@
 }
 
 .UserCard:hover {
+  cursor: pointer;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 

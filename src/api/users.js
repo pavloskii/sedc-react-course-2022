@@ -1,7 +1,7 @@
 import { useFetch } from "../hooks/useFetch";
 
-export function useUsers() {
-  return useFetch("/users?delay=1");
+export function useUsers(page) {
+  return useFetch(`/users?page=${page}&delay=3`);
 }
 
 export function useUser(id) {

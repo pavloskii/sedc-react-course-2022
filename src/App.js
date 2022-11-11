@@ -1,20 +1,32 @@
-import { useState } from "react";
-import { Home } from "./components/Home";
-import { UserDetails } from "./components/UserDetails";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { Home } from "./pages/Home";
+import { UserDetails } from "./pages/UserDetails";
+import "./App.css";
 
 function App() {
-  const [isHomeVisible, setIsHomeVisible] = useState(true);
+  const navigate = useNavigate();
 
-  function toggleView(){
-    setIsHomeVisible(!isHomeVisible)
+  function goToHomepage() {
+    navigate("/");
   }
 
   return (
     <div>
-      <button onClick={toggleView}>Toggle between home and Post Details</button>
-      <hr />
-      {!isHomeVisible && <UserDetails />}
-      {isHomeVisible && <Home />}
+      <header className="header">
+        <button onClick={goToHomepage}>
+          <i className="fa-solid fa-house"></i>
+        </button>
+        <hr></hr>
+      </header>
+
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/user-details/:userId" element={<UserDetails />} />
+        </Routes>
+      </main>
+
+      <footer className="footer">Made in SEDC course</footer>
     </div>
   );
 }

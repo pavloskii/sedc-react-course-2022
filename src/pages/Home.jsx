@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { Loader } from "./Loader";
-import { UserCard } from "./UserCard";
+import { Loader } from "../components/Loader";
+import { UserCard } from "../components/UserCard";
+import { Pagination } from "../components/Pagination";
 import { useUsers } from "../api/users";
 import "./Home.css";
 
 export function Home() {
-  const { data: users, error, isLoading } = useUsers();
+  const [page, setPage] = useState(1);
+  const { data: users, error, isLoading } = useUsers(page);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const searchInputRef = useRef();
 
@@ -15,13 +17,13 @@ export function Home() {
     }
 
     searchInputRef.current.focus();
-    setFilteredUsers(users);
+    setFilteredUsers(users.data);
   }, [users]);
 
   function filterUsers(event) {
     const value = event.target.value.toLowerCase();
 
-    const filtered = users.filter(
+    const filtered = users.data.filter(
       (user) =>
         user.first_name.toLowerCase().includes(value) ||
         user.last_name.toLowerCase().includes(value)
@@ -51,20 +53,29 @@ export function Home() {
           placeholder="Search.."
           onInput={filterUsers}
         />
-        <button>
+        <button disabled>
           <i className="fa fa-search"></i>
         </button>
       </div>
 
-      {filteredUsers.map((user) => (
-        <UserCard
-          key={user.id}
-          firstName={user.first_name}
-          lastName={user.last_name}
-          email={user.email}
-          image={user.avatar}
-        />
-      ))}
+      <main>
+        {filteredUsers.map((user) => (
+          <UserCard
+            key={user.id}
+            id={user.id}
+            firstName={user.first_name}
+            lastName={user.last_name}
+            email={user.email}
+            image={user.avatar}
+          />
+        ))}
+      </main>
+
+      <Pagination
+        totalPages={users.total_pages}
+        page={page}
+        setPage={setPage}
+      />
     </div>
   );
 }

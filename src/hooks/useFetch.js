@@ -16,7 +16,7 @@ export function useFetch(url) {
         signal: controller.signal,
       })
       .then((response) => {
-        setData(response.data.data);
+        setData(response.data);
       })
       .catch((error) => {
         setError(error.message);

@@ -7,7 +7,7 @@ const UseEffectExample = () => {
   //4. Dokolku se trgne aplikacijata od domot se izvrsu vtorata funkcija koja sto ja vrakja useEffect
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      alert("KLikni tuka za nagrada!");
+      alert("Alert!");
     }, 3000);
 
     return () => {
